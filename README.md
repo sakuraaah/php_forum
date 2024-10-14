@@ -1,3 +1,19 @@
+## User-side
+**Url**: http://localhost:8080/index-user.php
+```
+username: tiendung8a6@gmail.com
+password: 123456
+```
+
+## Admin-side
+**Url**: http://localhost:8080/index-admin.php
+```
+username: admin@gmail.com
+password: 123456
+```
+
+## Setup
+
 ### Launch the Web App
 
 To start the web app, open your console in project folder and run:
