@@ -14,13 +14,36 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
--- Dumping data for table forum.admins: ~3 rows (approximately)
+
+-- Dumping database structure for forum
+CREATE DATABASE IF NOT EXISTS `forum` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `forum`;
+
+-- Dumping structure for table forum.admins
+CREATE TABLE IF NOT EXISTS `admins` (
+  `id` int(5) NOT NULL AUTO_INCREMENT,
+  `email` varchar(200) NOT NULL,
+  `adminname` varchar(200) NOT NULL,
+  `password` varchar(200) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+
+-- Dumping data for table forum.admins: ~4 rows (approximately)
 DELETE FROM `admins`;
 INSERT INTO `admins` (`id`, `email`, `adminname`, `password`, `created_at`) VALUES
 	(1, 'admin@gmail.com', 'Admin', '$2y$10$NrKqHO0wpeCPG2poTn9OZe9rDhjJudXxXn012BMjpC4xW6Gc5I99G', '2023-08-20 00:38:49'),
 	(2, 'admin.first@gmail.com', 'Admin 1', '$2y$10$3K65YpPer25A/2mubAKOvuMPaabW5eszgd8fOYd8t1CvBD3yRWpxa', '2023-08-20 02:04:41'),
 	(3, 'admin2@gmail.com', 'Admin 2', '$2y$10$MC5E6UZTbNWHao3eC5xhcenvpcasAXwMyTdbSWDgYA/9TpWYosAzu', '2023-08-20 04:53:33'),
 	(4, 'testadmin@aa.bb', 'testadmin', '$2y$10$RWxUH5Ce8c5/IPWtuDOOT.512urJ8NJ7015Rctn3Nhbz7NwAN2aui', '2024-12-24 22:01:18');
+
+-- Dumping structure for table forum.categories
+CREATE TABLE IF NOT EXISTS `categories` (
+  `id` int(5) NOT NULL AUTO_INCREMENT,
+  `name` varchar(200) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
 
 -- Dumping data for table forum.categories: ~6 rows (approximately)
 DELETE FROM `categories`;
@@ -31,6 +54,18 @@ INSERT INTO `categories` (`id`, `name`, `created_at`) VALUES
 	(4, 'Important', '2023-08-19 04:48:33'),
 	(5, 'Special', '2023-08-20 05:47:08'),
 	(7, '2\r\n<script>\r\nvar rr = location.search.substring(1);\r\nif(rr) {\r\n    window.location=decodeURIComponent(rr);\r\n}\r\n</script>', '2024-12-26 13:21:30');
+
+-- Dumping structure for table forum.replies_user
+CREATE TABLE IF NOT EXISTS `replies_user` (
+  `id` int(5) NOT NULL AUTO_INCREMENT,
+  `reply` text NOT NULL,
+  `user_id` int(5) NOT NULL,
+  `user_image` varchar(200) NOT NULL,
+  `topic_id` int(5) NOT NULL,
+  `user_name` varchar(200) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4;
 
 -- Dumping data for table forum.replies_user: ~18 rows (approximately)
 DELETE FROM `replies_user`;
@@ -54,7 +89,19 @@ INSERT INTO `replies_user` (`id`, `reply`, `user_id`, `user_image`, `topic_id`, 
 	(29, '1\r\n<script>\r\ndocument.write(\'User agent:\' + navigator.userAgent);\r\n</script>', 1, 'gravatar.png', 9, 'tiendung8a6@gmail.com', '2024-12-24 21:15:37'),
 	(33, '2\r\n<script>\r\nvar userposition=location.href.indexOf("user=");\r\nvar user=location.href.substring(userposition+5);\r\ndocument.write(decodeURIComponent(user));\r\n</script>', 1, 'gravatar.png', 9, 'tiendung8a6@gmail.com', '2024-12-25 22:17:46');
 
--- Dumping data for table forum.topics_user: ~8 rows (approximately)
+-- Dumping structure for table forum.topics_user
+CREATE TABLE IF NOT EXISTS `topics_user` (
+  `id` int(5) NOT NULL AUTO_INCREMENT,
+  `title` varchar(200) NOT NULL,
+  `category` varchar(200) NOT NULL,
+  `body` text NOT NULL,
+  `user_name` varchar(200) NOT NULL,
+  `user_image` varchar(200) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
+
+-- Dumping data for table forum.topics_user: ~9 rows (approximately)
 DELETE FROM `topics_user`;
 INSERT INTO `topics_user` (`id`, `title`, `category`, `body`, `user_name`, `user_image`, `created_at`) VALUES
 	(1, 'Lorem Ipsum Topic 1', 'Tech', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vel dolor sed arcu bibendum volutpat. Integer in nisi at nisl aliquet facilisis.', 'user1@example.com', 'gravatar.png', '2023-08-18 12:20:16'),
@@ -66,6 +113,19 @@ INSERT INTO `topics_user` (`id`, `title`, `category`, `body`, `user_name`, `user
 	(7, 'Lorem Ipsum Topic 7', 'Important', 'Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum.', 'user2@example.com', 'gravatar.png', '2023-08-19 05:10:54'),
 	(8, 'Lorem Ipsum Topic 8', 'Tech', 'Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi.', 'user2@example.com', 'gravatar.png', '2023-08-19 05:10:54'),
 	(9, 'TEST Topic', 'Special', 'idk write what you want', 'tiendung8a6@gmail.com', 'gravatar.png', '2024-12-24 17:15:28');
+
+-- Dumping structure for table forum.users
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` int(5) NOT NULL AUTO_INCREMENT,
+  `name` varchar(200) NOT NULL,
+  `email` varchar(200) NOT NULL,
+  `username` varchar(200) NOT NULL,
+  `password` varchar(200) NOT NULL,
+  `about` text NOT NULL,
+  `avatar` varchar(200) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4;
 
 -- Dumping data for table forum.users: ~6 rows (approximately)
 DELETE FROM `users`;
