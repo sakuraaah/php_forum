@@ -1,0 +1,5 @@
+/admin
+/config
+/asdasdasd
+/users/1.php
+/categories/*
